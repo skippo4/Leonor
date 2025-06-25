@@ -18,9 +18,54 @@ const products = [
         price: 0,
         description: "8GB RAM, 128GB ROM",
         images: [
-            "fold1.jpg",
             "fold2.jpg",
+            "fold1.jpg",
             "fold3.jpg"
+        ]
+    },
+        {
+        id: 1,
+        name: "Benz",
+        price: 0,
+        description: "Benz",
+        images: [
+            "car1.jpg"
+        ]
+    },
+    {
+        id: 2,
+        name: "Benz",
+        price: 0,
+        description: "Benz",
+        images: [
+            "car2.jpg"
+        ]
+    },
+        {
+        id: 1,
+        name: "Benz",
+        price: 0,
+        description: "Benz",
+        images: [
+            "car3.jpg"
+        ]
+    },
+    {
+        id: 2,
+        name: "Benz",
+        price: 0,
+        description: "Benz",
+        images: [
+            "car4.jpg",
+        ]
+    },
+        {
+        id: 2,
+        name: "Benz",
+        price: 0,
+        description: "Benz",
+        images: [
+            "car5.jpg",
         ]
     },
     // Add more products...
