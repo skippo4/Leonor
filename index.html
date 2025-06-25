@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Princess Leonor</title>
+  <script defer src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- 🔥 Header with Logo -->
+  <div class="container mx-auto p-6">
+    <div class="flex items-center justify-center mb-6 space-x-3">
+      <img src="logo.png" alt="Logo" class="w-14 h-14 rounded-full object-cover">
+      <h1 class="text-3xl font-bold">Princess Leonor</h1>
+    </div>
+
+    <!-- 🛍️ Product Grid -->
+    <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Products injected by script.js -->
+    </div>
+
+    <!-- ✅ Checkout Button -->
+    <div class="mt-10 text-center">
+      <button onclick="openForm()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full">
+        Claim Gift
+      </button>
+    </div>
+  </div>
+
+  <!-- 📦 Modal Checkout Form -->
+  <div id="formModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+      <h2 class="text-xl font-bold mb-4 text-center">Customer Information</h2>
+
+      <form id="checkoutForm" class="space-y-4">
+        <input type="text" id="fullName" placeholder="Full Name" class="w-full border rounded px-4 py-2" required>
+        <input type="text" id="phoneNumber" placeholder="Phone Number" class="w-full border rounded px-4 py-2" required>
+        <input type="email" id="email" placeholder="Email Address" class="w-full border rounded px-4 py-2" required>
+        <textarea id="address" placeholder="Delivery Address" class="w-full border rounded px-4 py-2" required></textarea>
+
+        <div class="flex justify-between">
+          <button type="button" onclick="closeForm()" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+          <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Submit & Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 🌐 Google Translate (Auto + Hidden) -->
+  <div id="google_translate_element" class="hidden"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
