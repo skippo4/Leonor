@@ -24,7 +24,7 @@ const products = [
         ]
     },
         {
-        id: 1,
+        id: 3,
         name: "Benz",
         price: 0,
         description: "Benz",
@@ -33,7 +33,7 @@ const products = [
         ]
     },
     {
-        id: 2,
+        id: 4,
         name: "Benz",
         price: 0,
         description: "Benz",
@@ -42,7 +42,7 @@ const products = [
         ]
     },
         {
-        id: 1,
+        id: 5,
         name: "Benz",
         price: 0,
         description: "Benz",
@@ -51,7 +51,7 @@ const products = [
         ]
     },
     {
-        id: 2,
+        id: 6,
         name: "Benz",
         price: 0,
         description: "Benz",
@@ -60,7 +60,7 @@ const products = [
         ]
     },
         {
-        id: 2,
+        id: 7,
         name: "Benz",
         price: 0,
         description: "Benz",
