@@ -1,12 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blinking Loader Example</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OnlyFans</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fc;
+      padding-bottom: 70px; /* space for bottom nav */
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      background: white;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #bde4ff;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .post {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-info img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    .user-name {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .user-handle {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .dot-menu {
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .post-text {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .media-locked {
+      position: relative;
+      height: 250px;
+      background-image: url('https://via.placeholder.com/400x250');
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .media-locked::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(15px);
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    .media-locked .lock-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 35px;
+      color: white;
+      z-index: 2;
+    }
+
+    .subscribe-btn {
+      background: #00aff0;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 15px auto 5px;
+      display: block;
+      cursor: pointer;
+    }
+
+    .action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .actions-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .actions-left span,
+    .actions-right span {
+      cursor: pointer;
+    }
+
+    .likes-count {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      z-index: 999;
+    }
+
+    .bottom-nav div {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .bottom-nav div span {
+      display: block;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .bottom-nav .active {
+      color: #00aff0;
+      font-weight: bold;
+    }
+
+    .cover {
+      background: url('cover.jpg') no-repeat center center;
+      background-size: cover;
+      height: 200px;
+      position: relative;
+    }
+
+    .avatar {
+      position: absolute;
+      bottom: -40px;
+      left: 15px;
+      border: 4px solid white;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .profile-header {
+      padding: 60px 15px 15px 15px;
+      background: white;
+    }
+
+    .username {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .bio {
+      font-size: 14px;
+      color: #444;
+      margin: 10px 0;
+    }
+
+    .verified {
+      color: #00aff0;
+      font-weight: bold;
+    }
+
+    .stat {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      color: white;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .tab1 {
+      display: flex;
+      justify-content: space-around;
+      background: #e9ecef;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 14px;
     }
 
     #loader {
@@ -18,7 +254,7 @@
     }
 
     #logo {
-      width: 150px;
+      width: 500px;
       animation: blink 1s infinite;
     }
 
@@ -30,31 +266,610 @@
 
     #mainContent {
       display: none;
-      padding: 20px;
-      text-align: center;
     }
+
+    .lock-icon {
+      filter: blur(5px); 
+    }
+
+    .more-text {
+      display: none;
+    }
+
+    .read-more {
+      color: skyblue;
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    
+    .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cover-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.popup-body {
+  display: flex;
+  padding: 20px;
+  gap: 15px;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  object-fit: cover;
+  margin-top: -40px;
+}
+
+.popup-content {
+  flex: 1;
+  padding-top: 10px;
+}
+
+.popup-content h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.popup-content ul li {
+  margin-bottom: 8px;
+  padding-left: 22px;
+  position: relative;
+  font-size: 14px;
+}
+
+.popup-content ul li::before {
+  content: "✔️";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.popup-content button {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  z-index: 2;
+}
   </style>
 </head>
 <body>
 
-  <!-- Loader Section -->
   <div id="loader">
     <img src="logo.png" alt="Logo" id="logo">
   </div>
 
-  <!-- Main Content -->
   <div id="mainContent">
-    <h1>Welcome to the Page</h1>
-    <p>This content appears after the loader disappears.</p>
-  </div>
+    <div class="cover">
+      <div class="stat">
+        <div>📸 30M</div>
+        <div>🎥 225.3k</div>
+        <div>🔴 35</div>
+        <div>❤️ 17.5M</div>
+      </div>
+      <img src="photo.jpg" class="avatar" alt="Avatar">
+    </div>
 
-  <!-- JavaScript -->
+    <div class="profile-header">
+      <div class="username">ATQofficial<span class="verified">☑️</span></div>
+      <div class="bio">
+       <p> Welcome to the home of the Internets Filthiest Stepmom 😏
+       You do not want to subscribe if you are scared to fall in love with your Stepmom… 😅</p>
+        
+
+        <span class="more-text">
+
+      Once you get to know my kind, energetic, friendly side, you will already be falling. When you discover my adventurous naughty side... good luck 😉😈
+      
+      If you have got this far, it looks like you are ready for the challenge… so I will speak to you soon 😉</span>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More</span>
+      </div>
+     <button class="subscribe-btn">SUBSCRIBE       $100 FOR LIFE</button>
+    </div>
+
+    <div class="tab1">
+      <div>780 POSTS</div>
+      <div>539 MEDIA</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active">All 835</div>
+      <div class="tab">Archive 87</div>
+    </div>
+
+    <!-- Post -->
+    <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>Today</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card1.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">189k likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>Today</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card2.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">23k likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>Today</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card3.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">678 likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>Yesterday</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card4.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">560 likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>Yesterday</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card9.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">307k likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>Yesterday</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card5.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">1307 likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>15 July, 2025</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card6.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">134 likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>15 July, 2025</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card7.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">1307 likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>15 July, 2025</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card8.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">1307 likes</div>
+    </div>
+        <div class="post">
+      <div class="post-header">
+        <div class="user-info">
+          <img src="photo.jpg" alt="Profile">
+          <div>
+            <div class="user-name">ATQoffical ☑️</div>
+            <div class="user-handle">@atqmodel</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <small>15 July, 2025</small>
+          <span class="dot-menu">⋮</span>
+        </div>
+      </div>
+
+      <div class="post-text">Here’s some love💋</div>
+
+      <!-- Locked Media -->
+      <div class="media-locked">
+        <div class="lock-icon" > <img src="card10.jpg" ></div>
+      </div>
+      <a href="sub.html"><button class="subscribe-btn">SUBSCRIBE TO SEE USER'S POSTS</button></a>
+
+      <div class="action-bar">
+        <div class="actions-left">
+          <span>🤍</span>
+          <span>💬</span>
+          <span>💰 SEND TIP</span>
+        </div>
+        <div class="actions-right">
+          <span>🔖</span>
+        </div>
+      </div>
+
+      <div class="likes-count">1007 likes</div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="active">🏠<span>Home</span></div>
+      <div>🔔<span>Alerts</span></div>
+      <div>➕<span>Add</span></div>
+      <div>💬<span>Chat</span></div>
+      <div>👤<span>Me</span></div>
+    </div>
+  </div>
+  
+  
+  
+  <!-- Popup Overlay -->
+<div class="overlay" id="popupOverlay">
+  <div class="popup-card">
+    <div class="close-btn" onclick="closePopup()">×</div>
+
+    <!-- Cover Image -->
+    <img src="card2.jpg" class="cover-img" alt="Cover Image">
+
+    <!-- Profile and Content Row -->
+    <div class="popup-body">
+      <img src="photo.jpg" class="profile-img" alt="Profile">
+      
+      <div class="popup-content">
+        <h2>Subscribe and get these benefits:</h2>
+        <ul>
+          <li>Full Access to User's Content</li>
+          <li>Direct Message with this User</li>
+          <li>Cancel Your Subscription at any time</li>
+        </ul>
+      <a href="sub.html" class="popup-button" style="text-align:center;display:block;background:#007bff;color:white;padding:10px;border-radius:8px;margin-top:15px;text-decoration:none;">
+  SUBSCRIBE $100 FOR LIFETIME
+</a>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script>
     window.addEventListener('load', function () {
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
+      setTimeout(function () {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+      }, 5000);
     });
-  </script>
 
+    function toggleReadMore(elem) {
+      const moreText = elem.previousElementSibling;
+      if (moreText.style.display === "inline") {
+        moreText.style.display = "none";
+        elem.textContent = "Read More";
+      } else {
+        moreText.style.display = "inline";
+        elem.textContent = "Read Less";
+      }
+    }
+    
+    
+   
+  function openPopup() {
+    document.getElementById('popupOverlay').style.display = 'flex';
+  }
+
+  function closePopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+  }
+
+  // Attach popup to all .subscribe-btn buttons
+  document.addEventListener("DOMContentLoaded", function () {
+    const subBtns = document.querySelectorAll(".subscribe-btn");
+    subBtns.forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent link or navigation
+        openPopup();
+      });
+    });
+  });
+
+  </script>
 </body>
 </html>
